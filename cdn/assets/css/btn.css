@@ -1,0 +1,9 @@
+.btn-blue{
+    background: #0000ff;
+}
+.btn-blue:hover{
+    background: #0000cd;
+}
+.form-content .form-group:nth-of-type(3):before {
+   background: transparent !important;
+}

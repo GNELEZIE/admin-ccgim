@@ -1,0 +1,21 @@
+
+#Header add Access-Control-Allow-Origin "https://www.cabinet-ccgim.com"
+#RewriteCond %{SERVER_PORT} 80
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^.*$ /index.php [L,QSA]
+# Active la réécriture d'URL :
+RewriteEngine On
+
+#RewriteCond %{SERVER_PORT} 80
+#RewriteRule ^(.*)$ https://d-cliq.net/$1 [R,L]
+
+# Si le fichiers demandé n'existe pas :
+RewriteCond %{REQUEST_FILENAME} !-f
+# Si le dossier demandé n'existe pas non plus :
+RewriteCond %{REQUEST_FILENAME} !-d
+# On redirige vers index.php
+
+RewriteRule . index.php [L]
+
+RewriteRule ^([^\.]+)$ $1.php
