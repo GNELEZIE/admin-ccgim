@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>404 page introuvable </title>
-    <link rel="icon" href="<?=$asset?>/media/logoAEEK.png" type="image/x-icon">
+    <link rel="icon" href="<?=$cdn_domaine?>/media/logoAEEK.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">

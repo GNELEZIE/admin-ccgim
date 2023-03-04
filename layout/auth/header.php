@@ -1275,7 +1275,10 @@
         .w50-ms{
             width: 50%;
         }
-
+        .owl-carousel .owl-item img {
+            object-fit: cover !important;
+            height: 169px !important;
+        }
 
 
 

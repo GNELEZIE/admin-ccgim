@@ -19,7 +19,7 @@
                                         <?php
                                         if(isset($_SESSION['_ccgim_201'])){
                                             $n_b = $logement->getNblogements()->fetch();
-                                            $n_loc = $locataire->getNbLocataire()->fetch();
+                                            $n_loc = $location->getNbLocataire()->fetch();
                                             ?>
                                             <div class="link">
                                                 <a href="<?=$domaine?>/compte/dashboard" class="<?= dash_active('dashboard');?>">Tableau de bord</a>

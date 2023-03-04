@@ -186,8 +186,19 @@ class Tresorerie
 
 
 
+    public function SoldeTotal(){
+        $query = "SELECT SUM(debit_transac) as solde FROM tresorerie";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
+
     public function getSoldeTotal(){
         $query = "SELECT SUM(debit_transac) - SUM(credit_transac) as solde FROM tresorerie";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
+    public function getCreditSoldeTotal(){
+        $query = "SELECT SUM(credit_transac) as solde FROM tresorerie";
         $rs = $this->bdd->query($query);
         return $rs;
     }

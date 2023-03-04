@@ -14,7 +14,7 @@ if(isset($_GET['page']) and is_numeric($_GET['page'])){
     $fin = 12;
 }
 
-$nblog = $logement->getNblogementsByUser($_SESSION['_ccgim_201']['id_utilisateur']);
+$nblog = $logement->getNblogementsByUsers();
 if($nbre = $nblog->fetch()){
     $pages = ceil($nbre['nb']/12);
 }else{
@@ -22,7 +22,7 @@ if($nbre = $nblog->fetch()){
 }
 $pagination_list = '';
 $myPage = '/compte/logements';
-$lgst = $logement->getLogementByUser($_SESSION['_ccgim_201']['id_utilisateur'],$debut, $fin);
+$lgst = $logement->getLogementByUsers($debut, $fin);
 
 
 

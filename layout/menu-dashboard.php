@@ -1,6 +1,6 @@
 <?php
 $n_b = $logement->getNblogements()->fetch();
-$n_loc = $locataire->getNbLocataire()->fetch();
+$n_loc = $location->getNbLocataire()->fetch();
 ?>
 
     <div class="link">

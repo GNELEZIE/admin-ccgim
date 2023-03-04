@@ -3,7 +3,9 @@ $my_gain ='';
 if(isset($_SESSION['_ccgim_201']) and isset($_SESSION['myformkey']) and isset($_POST['token']) and $_SESSION['myformkey'] == $_POST['token']){
 
     $montant = $gain->getGainTotal()->fetch();
-    $my_gain .=number_format($montant['solde'],0 ,' ',' ').' FCFA';
+    $ga = $tresorerie->getCreditSoldeTotal()->fetch();
+    $sld = $montant['solde'] - $ga['solde'];
+    $my_gain = number_format($sld,0 ,' ',' ').' FCFA';
 
 
 }

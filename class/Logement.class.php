@@ -78,6 +78,12 @@ class Logement{
 
 
 
+    public function getLogementByUsers($debut, $fin){
+        $query = "SELECT * FROM logement
+               WHERE adm = 0   ORDER BY id_logement DESC LIMIT $debut, $fin";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
 
     public function getLogementByUser($utilisateur_id,$debut, $fin){
         $query = "SELECT * FROM logement
@@ -147,6 +153,12 @@ class Logement{
     //Count
 
 
+    public function getNblogementsByUsers(){
+        $query = "SELECT COUNT(*) as nb FROM logement";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
+
     public function getNblogementsByUser($userId){
         $query = "SELECT COUNT(*) as nb FROM logement
           WHERE utilisateur_id =:userId";
@@ -156,9 +168,11 @@ class Logement{
         ));
         return $rs;
     }
+
+
     public function getNblogements(){
         $query = "SELECT COUNT(*) as nb FROM logement
-          WHERE statut != 1";
+          WHERE statut != 1 AND  adm = 0";
         $rs = $this->bdd->query($query);
         return $rs;
     }

@@ -104,7 +104,7 @@ include_once $layout.'/auth/header.php'?>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" id="formPayer">
+            <form method="post" id="formSortieCaisse">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="libelle" class="pd15">Libellé</label>
@@ -280,29 +280,41 @@ include_once $layout.'/auth/header.php'?>
                 }
             });
         }
-        $('#formPayer').submit(function(e){
+        $('#formSortieCaisse').submit(function(e){
             e.preventDefault();
-            $value = $(this);
-            $(".loaderBtnPay").html('<i class="fa fa-circle-o-notch fa-spin"></i>');
-            $.post('<?=$domaine?>/controle/sortieCaisse.save', $value.serialize(), function (data) {
-//                alert(data);
-                if(data == 'ok'){
-                    $('#locataire').val('');
-                    $('#libelle').val('');
-                    $('#montant').val('');
-                    chargeSolde();
-                    table_tresorerie.ajax.reload(null,false);
-                    $(".loaderBtnPay").html('');
-                    swal("Le paiement a été ajouté avec succès !","", "success");
-                }else if(data == 'solde'){
-                    $(".loaderBtnPay").html('');
-                    swal("Action Impossible !", "Votre solde est insuffisant !", "error");
-                }
-                else{
-                    swal("Action Impossible !", "Une erreur s\'est produite.", "error");
-                    $(".loaderBtnPay").html('');
+            var value = document.getElementById('formSortieCaisse');
+            var form = new FormData(value);
+
+            $.ajax({
+                method: 'post',
+                url: '<?=$domaine?>/controle/sortiecaisse.save',
+                data: form,
+                contentType:false,
+                cache:false,
+                processData:false,
+                success: function(data){
+                    if(data == 'ok'){
+                        $('#locataire').val('');
+                        $('#libelle').val('');
+                        $('#montant').val('');
+                        chargeGain();
+                        table_tresorerie.ajax.reload(null,false);
+                        $(".loaderBtnPay").html('');
+                        swal("Le paiement a été ajouté avec succès !","", "success");
+                    }else if(data == 'solde'){
+                        $(".loaderBtnPay").html('');
+                        swal("Action Impossible !", "Votre solde est insuffisant !", "error");
+                    }
+                    else{
+                        swal("Action Impossible !", "Une erreur s\'est produite.", "error");
+                        $(".loaderBtnPay").html('');
+                    }
+                },
+                error: function (error, ajaxOptions, thrownError) {
+                    alert(error.responseText);
                 }
             });
+
         });
 
 

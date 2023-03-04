@@ -5,7 +5,7 @@ if(isset($_SESSION['_ccgim_201'])  and isset($_POST['libelle']) and isset($_SESS
 
     $libelle = htmlentities(trim(addslashes(strip_tags($libelle))));
 
-    $lgt_id = 6;
+    $lgt_id = 1;
     $locataire = 1;
     $type_transac = 2;
     $debit = 0;

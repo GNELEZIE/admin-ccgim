@@ -66,8 +66,7 @@ class Location
 
 //Count
     public function getNbLocataire(){
-        $query = "SELECT COUNT(*) as nb FROM locataire
-          WHERE statut != 1";
+        $query = "SELECT COUNT(*) as nb FROM location";
         $rs = $this->bdd->query($query);
         return $rs;
     }
