@@ -9,7 +9,7 @@ $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
 
-include_once $layout.'/auth/header.php'
+include_once $layout.'/auth/header2.php'
 ?>
 
 
@@ -18,6 +18,11 @@ include_once $layout.'/auth/header.php'
             <div class="row">
                 <div class="col-md-6 offset-3">
                     <form class="cd-form  bg-white-color formForgot" method="post" id="formForgot" style="margin: 30px;">
+                        <div class="text-center pb-5">
+                            <a href="<?=$domaine?>">
+                                <img src="<?=$cdn_domaine?>/media/log01.png" class="myLogoAuth" alt="Logo" />
+                            </a>
+                        </div>
                         <div class="text-center">
                             <h3 class="p-3" style="margin: 0; font-weight: bold;">Réinitialisation du mot de passe</h3>
                             <p>Vous avez oublié votre mot de passe ? Entrez votre adresse e-mail ci-dessous et nous vous enverrons un e-mail pour réinitialisé votre mot de passe.</p>
