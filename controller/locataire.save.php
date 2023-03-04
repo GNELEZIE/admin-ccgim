@@ -19,7 +19,7 @@ if(isset($_SESSION['_ccgim_201']) and isset($_POST['lgt']) and isset($_POST['nom
     $rsSlug = $verifSlug->fetch();
     $nbSlug =$verifSlug->rowCount();
     $typeCompte = 1;
-    $password = '123456789';
+    $password = $phone;
     $email = 'locataire@cabinet-ccgim.com';
     $options = ['cost' => 12];
     $mdpCript = password_hash($password, PASSWORD_BCRYPT, $options);
