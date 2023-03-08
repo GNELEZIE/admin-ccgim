@@ -131,7 +131,6 @@ include_once $layout.'/auth/header.php'?>
                             </div>
                         </div>
                     </div>
-
                     <div class="hist">
                         <h3>Les derniers versements</h3>
                         <table class="table-striped  pc-none">
