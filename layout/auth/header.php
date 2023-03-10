@@ -1279,6 +1279,37 @@
             object-fit: cover !important;
             height: 169px !important;
         }
+        .line-height1{
+            line-height: 1.5 !important;
+        }
+        .img-money{
+            object-fit: contain;
+            border-radius: 50px;
+            height: 70px;
+        }
+        .sld{
+            background: rgb(0 128 0 / 12%);
+            color: #008000;
+            padding: 2px 10px;
+            border-radius: 5px;
+            margin-bottom: 7px;
+        }
+        .sld-red{
+            background: rgba(255, 0, 0, 0.24);
+            color: #FF0000;
+            padding: 2px 10px;
+            border-radius: 5px;
+        }
+
+        .sld-green{
+            background: #008000;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 5px;
+        }
+        .pb7{
+         margin-bottom: 7px !important;
+        }
 
 
 
