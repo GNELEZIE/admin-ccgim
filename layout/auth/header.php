@@ -1310,6 +1310,42 @@
         .pb7{
          margin-bottom: 7px !important;
         }
+        .om{
+            background: #ff7900;
+            color: #fff;
+            border-radius: 6px;
+            padding: 7px 13px;
+            margin-right: 11px;
+        }
+        .om:hover{
+            background: #df6a00;
+            color: #fff;
+        }
+        .mtn{
+            background: #feca18;
+            color: #fff;
+            border-radius: 6px;
+            padding: 7px 13px;
+            margin-right: 11px;
+        }
+        .mtn:hover{
+            background: #e2b415;
+            color: #fff;
+            border-radius: 6px;
+            padding: 7px 13px;
+            margin-right: 11px;
+        }
+        .moov{
+            background: #0061aa;
+            color: #fff;
+            border-radius: 6px;
+            padding: 7px 13px;
+            margin-right: 11px;
+        }
+        .moov:hover{
+            background: #007cda;
+            color: #fff;
+        }
 
 
 

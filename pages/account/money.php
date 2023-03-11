@@ -69,7 +69,11 @@ include_once $layout.'/auth/header.php'
                                 </div>
                             </div>
                         </div>
-
+                         <div class="">
+                             <a href="<?=$domaine?>/compte/orange" class="om">Orange money</a>
+                             <a href="<?=$domaine?>/compte/mtn" class="mtn">MTN money</a>
+                             <a href="<?=$domaine?>/compte/moov" class="moov">Moov money</a>
+                         </div>
                     </div>
                 </div>
             </div>

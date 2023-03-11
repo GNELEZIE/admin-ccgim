@@ -32,6 +32,7 @@ include_once $class.'/Locataire.class.php';
 include_once $class.'/Tresorerie.class.php';
 include_once $class.'/Location.class.php';
 include_once $class.'/Gain.class.php';
+include_once $class.'/Money.class.php';
 
 
 
