@@ -108,6 +108,11 @@ class Money
 
         return $rs;
     }
+    public function getSoldeTotal(){
+        $query = "SELECT SUM(debit_transac) - SUM(credit_transac) as solde FROM money";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
 
 
     public function getGainTotal()

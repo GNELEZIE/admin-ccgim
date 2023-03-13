@@ -76,8 +76,7 @@ include_once $layout.'/auth/header.php'
                                     </div>
                                     <div class="nbLgt">
                                         <h2>Montant total</h2>
-                                        <h2 class="pb7"> <span class="sld">15 000 <small>FCFA</small></span> </h2>
-                                        <p class="line-height1"><small><i><span class="sld-red">50 000 <small>FCFA</small></span> depensé</i></small></p>
+                                        <h2 class="pb7"> <span class="sld"> <span class="total_solde"></span> </span> </h2>
                                     </div>
                                 </div>
                             </div>
@@ -99,6 +98,22 @@ include_once $layout.'/auth/header.php'
 
 <script>
     $(document).ready(function() {
+
+        chargeSoldeTotal();
+        function chargeSoldeTotal(){
+            $.ajax({
+                type: 'post',
+                data: {
+                    token: "<?=$token?>"
+                },
+                url: '<?=$domaine?>/controle/soldetotal',
+                dataType: 'json',
+                success: function(data){
+                    $('.total_solde').html(data.total_solde);
+                }
+            });
+        }
+
         chargeSoldeOr();
         function chargeSoldeOr(){
             $.ajax({
