@@ -16,7 +16,7 @@ $n_loc = $location->getNbLocataire()->fetch();
         <a href="<?=$domaine?>/logement/logements"  class="<?= dash_active('logements');?>"> <span class="w80"><i class="fa fa-home-alt font-13"></i> Mes logements</span> <span class="w20"><i class="nb-box" style="font-style: normal;"><?=$n_b['nb']?></i></span></a>
     </div>
     <div class="link">
-        <a href="<?=$domaine?>/compte/money"  class="<?= dash_active('money');?>"> <span class="w80"><i class="fa fa-home-alt font-13"></i> Money </span> </a>
+        <a href="<?=$domaine?>/compte/money"  class="<?= dash_active('money');?> <?= dash_active('orange');?> <?= dash_active('mtn');?><?= dash_active('moov');?>"> <span class="w80"><i class="fa fa-wallet font-13"></i> Money </span> </a>
     </div>
 
 

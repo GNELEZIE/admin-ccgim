@@ -24,6 +24,27 @@ class Money
             return $r;
         }
     }
+  public function addOrange($moneyDate,$reseau,$libelle,$typeTransac,$debit,$credit,$userId){
+        $query = "INSERT INTO money(date_money,reseau,libelle,type_transac,debit_transac,credit_transac,user_id)
+            VALUES (:moneyDate,:reseau,:libelle,:typeTransac,:debit,:credit,:userId)";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "moneyDate" => $moneyDate,
+            "reseau" => $reseau,
+            "libelle" => $libelle,
+            "typeTransac" => $typeTransac,
+            "debit" => $debit,
+            "credit" => $credit,
+            "userId" => $userId
+        ));
+        $nb = $rs->rowCount();
+        if($nb > 0){
+            $r = $this->bdd->lastInsertId();
+            return $r;
+        }
+    }
+
+
 
     // Read
 
@@ -45,6 +66,48 @@ class Money
 
 
 //Count
+
+    public function getSoldeByIdResau($rsId){
+        $query = "SELECT SUM(debit_transac) - SUM(credit_transac) as solde FROM money
+        WHERE reseau = :rsId";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "rsId" => $rsId
+        ));
+
+        return $rs;
+    }
+
+        public function getDebitSoldeByIdResau($rsId){
+        $query = "SELECT SUM(debit_transac) as solde FROM money
+        WHERE reseau = :rsId";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "rsId" => $rsId
+        ));
+
+        return $rs;
+    }
+        public function getCreditSoldeByIdResau($rsId){
+        $query = "SELECT SUM(credit_transac) as solde FROM money
+        WHERE reseau = :rsId";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "rsId" => $rsId
+        ));
+
+        return $rs;
+    }
+    public function getSoldeDispoByIdResau($rsId){
+        $query = "SELECT SUM(debit_transac) - SUM(credit_transac) as solde FROM money
+        WHERE reseau = :rsId";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "rsId" => $rsId
+        ));
+
+        return $rs;
+    }
 
 
     public function getGainTotal()

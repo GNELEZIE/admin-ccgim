@@ -1144,8 +1144,9 @@ label {
     width: 100%;
 }
 
-
-
+.om a:hover, .om a:focus {
+    color: #fff !important;
+}
 
 
 
@@ -1157,6 +1158,9 @@ label {
 
 
 @media(max-width: 767px) {
+    .mpt50{
+        padding-bottom: 25px;
+    }
     .cd-form input.has-padding {
         padding: 16px 20px 16px 50px;
     }

@@ -1346,6 +1346,15 @@
             background: #007cda;
             color: #fff;
         }
+      a.om:focus {
+            color: #fff !important;
+        }
+      .pb10{
+          padding-bottom: 10px !important;
+      }
+      .mt12{
+          margin-top: 12px !important;
+      }
 
 
 
@@ -1356,7 +1365,9 @@
             .cd-form input.has-padding {
                 padding: 16px 20px 16px 50px;
             }
-
+            .mpt50{
+                padding-bottom: 25px;
+            }
             .cd-form input.has-padding {
                 padding: 12px 20px 12px 50px;
             }

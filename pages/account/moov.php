@@ -23,7 +23,7 @@ include_once $layout.'/auth/header.php'
             </div>
             <div class="col-md-9 pd-mobile">
                 <div class="header-box">
-                    Orange money
+                    MOOV money
                 </div>
                 <div class="bg-white-color p30">
                     <div class="row">
@@ -33,7 +33,7 @@ include_once $layout.'/auth/header.php'
                         <div class="col-md-4">
                             <div class="ts-box">
                                 <div class="icon">
-                                    <img src="<?=$cdn_domaine?>/media/om.png" class="img-money" alt=""/>
+                                    <img src="<?=$cdn_domaine?>/media/mov.png" class="img-money" alt=""/>
                                 </div>
                                 <div class="nbLgt pb10">
                                     <h2>Solde disponible</h2>
@@ -44,7 +44,7 @@ include_once $layout.'/auth/header.php'
                         <div class="col-md-4">
                             <div class="ts-box">
                                 <div class="icon">
-                                    <img src="<?=$cdn_domaine?>/media/om.png" class="img-money" alt=""/>
+                                    <img src="<?=$cdn_domaine?>/media/mov.png" class="img-money" alt=""/>
                                 </div>
                                 <div class="nbLgt">
                                     <h2>Solde total</h2>
@@ -56,7 +56,7 @@ include_once $layout.'/auth/header.php'
                     </div>
                     <div class="">
                         <div class="pt-2" style="padding-top: 20px">
-                            <table id="table_orange" class="table newtable">
+                            <table id="table_moov" class="table newtable">
                                 <thead>
                                 <tr>
                                     <th>Date</th>
@@ -83,7 +83,7 @@ include_once $layout.'/auth/header.php'
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" id="formOrange">
+            <form method="post" id="formMoov">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="type_transac" class="pd15">Type d'opération</label>
@@ -116,7 +116,7 @@ include_once $layout.'/auth/header.php'
 
 <?php include_once $layout.'/auth/footer.php'?>
 <script>
-    var table_orange;
+    var table_moov;
     $(document).ready(function() {
 
         chargeSoldeDispoOrange();
@@ -124,7 +124,7 @@ include_once $layout.'/auth/header.php'
             $.ajax({
                 type: 'post',
                 data: {
-                    rsid: 1,
+                    rsid: 3,
                     token: "<?=$token?>"
                 },
                 url: '<?=$domaine?>/controle/dispo.orange',
@@ -139,7 +139,7 @@ include_once $layout.'/auth/header.php'
             $.ajax({
                 type: 'post',
                 data: {
-                    rsid: 1,
+                    rsid: 3,
                     token: "<?=$token?>"
                 },
                 url: '<?=$domaine?>/controle/solde.orange',
@@ -156,7 +156,7 @@ include_once $layout.'/auth/header.php'
             $.ajax({
                 type: 'post',
                 data: {
-                    rsid: 1,
+                    rsid: 3,
                     token: "<?=$token?>"
                 },
                 url: '<?=$domaine?>/controle/credit.orange',
@@ -171,10 +171,10 @@ include_once $layout.'/auth/header.php'
 
         $('#type_transac').niceSelect();
 
-        table_orange = $('#table_orange').DataTable({
+        table_moov = $('#table_moov').DataTable({
             "ajax": {
                 "type": "post",
-                "url": "<?=$domaine?>/controle/orange.liste",
+                "url": "<?=$domaine?>/controle/moov.liste",
                 "data": {
                     token: "<?=$token?>"
                 }
@@ -204,13 +204,13 @@ include_once $layout.'/auth/header.php'
             }
         });
 
-        $('#formOrange').submit(function(e){
+        $('#formMoov').submit(function(e){
             e.preventDefault();
-            var value = document.getElementById('formOrange');
+            var value = document.getElementById('formMoov');
             var form = new FormData(value);
             $.ajax({
                 method: 'post',
-                url: '<?=$domaine?>/controle/orange.save',
+                url: '<?=$domaine?>/controle/moov.save',
                 data: form,
                 contentType:false,
                 cache:false,
@@ -222,7 +222,7 @@ include_once $layout.'/auth/header.php'
                         chargeSoldeOrange();
                         chargeCreditOrange();
                         chargeSoldeDispoOrange();
-                        table_orange.ajax.reload(null,false);
+                        table_moov.ajax.reload(null,false);
                         swal("Opération effectuée avec succès !","", "success");
                     }else if(data == 'solde'){
                         $(".loaderBtnPay").html('');
