@@ -2,7 +2,7 @@
 $total_solde ='';
 if(isset($_SESSION['_ccgim_201']) and isset($_SESSION['myformkey']) and isset($_POST['token']) and $_SESSION['myformkey'] == $_POST['token']){
 
-    $montant = $money->getSoldeTotal()->fetch();
+    $montant = $money->getGainTotals()->fetch();
     $total_solde .=number_format($montant['solde'],0 ,' ',' ').' <small>FCFA</small>';
 
 
