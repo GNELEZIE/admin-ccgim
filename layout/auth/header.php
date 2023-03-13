@@ -1346,6 +1346,17 @@
             background: #007cda;
             color: #fff;
         }
+        .wave{
+            background: #12b9ee;
+            color: #fff;
+            border-radius: 6px;
+            padding: 7px 13px;
+            margin-right: 11px;
+        }
+        .wave:hover{
+            background: #13c7ff;
+            color: #fff;
+        }
       a.om:focus {
             color: #fff !important;
         }
