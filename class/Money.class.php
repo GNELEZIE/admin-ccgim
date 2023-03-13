@@ -109,7 +109,8 @@ class Money
         return $rs;
     }
     public function getSoldeTotal(){
-        $query = "SELECT SUM(debit_transac) - SUM(credit_transac) as solde FROM money";
+        $query = "SELECT SUM(debit_transac) - SUM(credit_transac) as solde FROM money
+        WHERE reseau = :rsId";
         $rs = $this->bdd->query($query);
         return $rs;
     }

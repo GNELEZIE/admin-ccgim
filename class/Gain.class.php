@@ -9,14 +9,15 @@ class Gain
 
     //Create
 
-    public function addGain($gainDate,$lgtId,$montant){
-        $query = "INSERT INTO gain(date_gain,lg_id,gain)
-            VALUES (:gainDate,:lgtId,:montant)";
+    public function addGain($gainDate,$lgtId,$montant,$typeTransac){
+        $query = "INSERT INTO gain(date_gain,lg_id,gain,type_transac)
+            VALUES (:gainDate,:lgtId,:montant,:typeTransac)";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "gainDate" => $gainDate,
             "lgtId" => $lgtId,
-            "montant" => $montant
+            "montant" => $montant,
+            "typeTransac" => $typeTransac
         ));
         $nb = $rs->rowCount();
         if($nb > 0){
@@ -31,7 +32,16 @@ class Gain
 
     public function getGainTotal()
     {
-        $query = "SELECT SUM(gain) as solde FROM gain";
+        $query = "SELECT SUM(gain) as solde FROM gain
+                  WHERE type_transac = 0";
+        $rs = $this->bdd->query($query);
+        return $rs;
+
+    }
+    public function getDepenseTotal()
+    {
+        $query = "SELECT SUM(gain) as solde FROM gain
+                  WHERE type_transac = 1";
         $rs = $this->bdd->query($query);
         return $rs;
 

@@ -14,8 +14,9 @@ if(isset($_SESSION['_ccgim_201']) and isset($_POST['userId']) and isset($_POST['
         $credit = 0;
         $save = $tresorerie->addOperation($dateGmt,$userId,$lgt_id,$type_transac,$libelle,$debit,$credit);
         if($save > 0){
+            $type_transac = 0;
             $mygain = gain($debit);
-            $payGain = $gain->addGain($dateGmt,$lgt_id,$mygain);
+            $payGain = $gain->addGain($dateGmt,$lgt_id,$mygain,$type_transac);
             echo 'ok';
         }
     }

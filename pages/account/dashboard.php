@@ -6,8 +6,11 @@ if(!isset($_SESSION['_ccgim_201'])){
 }
 $annee = date('Y');
 $mois = date('m');
+$gainTotal = $gain->getGainTotal()->fetch();
+$gainTotalDepense = $gain->getDepenseTotal()->fetch();
 $debitMois = $tresorerie->getPaiementMontByMonth($annee,$mois)->fetch();
 $creditMois = $tresorerie->getRetraitMontByMonth($annee,$mois)->fetch();
+
 $Allcredit = $tresorerie->getAllCredit()->fetch();
 $montant = $tresorerie->getSoldeTotal()->fetch();
 $my_solde = number_format($montant['solde'],0 ,' ',' ').' <small>FCFA</small>';
@@ -42,8 +45,8 @@ include_once $layout.'/auth/header.php'?>
                                         <i class="fa fa-arrow-trend-down myicon-trend my-icon-dashboard-red"></i>
                                     </div>
                                     <div class="nbLgt">
-                                        <h2><?=number_format($creditMois['solde'],0,',',' ')?> <small>FCFA</small></h2>
-                                        <p>Depense du mois</p>
+                                        <h2><?=number_format($gainTotalDepense['solde'],0,',',' ')?> <small>FCFA</small></h2>
+                                        <p>Depense total</p>
                                     </div>
                                 </div>
                             </div>
@@ -53,32 +56,8 @@ include_once $layout.'/auth/header.php'?>
                                         <i class="fa fa-arrow-trend-up myicon-trend my-icon-dashboard-green"></i>
                                     </div>
                                     <div class="nbLgt">
-                                        <h2><?=number_format($debitMois['solde'],0,',',' ')?> <small>FCFA</small></h2>
-                                        <p>Solde du mois</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="mycol50 m5">
-                                <div class="ts-box-red mb10">
-                                    <div class="icon">
-                                        <i class="fa fa-arrow-trend-down myicon-trend my-icon-dashboard-red"></i>
-                                    </div>
-                                    <div class="nbLgt">
-                                        <h2><?=number_format($Allcredit['solde'],0,',',' ')?> <small>FCFA</small></h2>
-                                        <p>Depense total</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mycol50 m5">
-                                <div class="ts-box-green mb10">
-                                    <div class="icon">
-                                        <i class="fa fa-wallet myicon-trend my-icon-dashboard-green"></i>
-                                    </div>
-                                    <div class="nbLgt">
-                                        <h2><?=$my_solde?></h2>
-                                        <p>Solde total</p>
+                                        <h2><?=number_format($gainTotal['solde'],0,',',' ')?> <small>FCFA</small></h2>
+                                        <p>Gain total</p>
                                     </div>
                                 </div>
                             </div>
@@ -91,8 +70,8 @@ include_once $layout.'/auth/header.php'?>
                                     <i class="fa fa-arrow-trend-down myicon-trend my-icon-dashboard-red"></i>
                                 </div>
                                 <div class="nbLgt">
-                                    <h2><?=number_format($creditMois['solde'],0,',',' ')?> <small>FCFA</small></h2>
-                                    <p>Depense du mois</p>
+                                    <h2><?=number_format($gainTotalDepense['solde'],0,',',' ')?> <small>FCFA</small></h2>
+                                    <p>Depense total</p>
                                 </div>
                             </div>
                         </div>
@@ -102,34 +81,12 @@ include_once $layout.'/auth/header.php'?>
                                     <i class="fa fa-arrow-trend-up myicon-trend my-icon-dashboard-green"></i>
                                 </div>
                                 <div class="nbLgt">
-                                    <h2><?=number_format($debitMois['solde'],0,',',' ')?> <small>FCFA</small></h2>
-                                    <p>Solde du mois</p>
+                                    <h2><?=number_format($gainTotal['solde'],0,',',' ')?> <small>FCFA</small></h2>
+                                    <p>Gain total</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-3">
-                            <div class="ts-box-red">
-                                <div class="icon">
-                                    <i class="fa fa-arrow-trend-down myicon-trend my-icon-dashboard-red"></i>
-                                </div>
-                                <div class="nbLgt">
-                                    <h2><?=number_format($Allcredit['solde'],0,',',' ')?> <small>FCFA</small></h2>
-                                    <p>Depense total</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="ts-box-green">
-                                <div class="icon">
-                                    <i class="fa fa-wallet myicon-trend my-icon-dashboard-green"></i>
-                                </div>
-                                <div class="nbLgt">
-                                    <h2><?=$my_solde?></h2>
-                                    <p>Solde total</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="hist">
                         <h3>Les derniers versements</h3>
@@ -205,6 +162,20 @@ include_once $layout.'/auth/header.php'?>
 
 <?php include_once $layout.'/auth/footer.php'?>
 <script>
+    chargeGain();
+    function chargeGain(){
+        $.ajax({
+            type: 'post',
+            data: {
+                token: "<?=$token?>"
+            },
+            url: '<?=$domaine?>/controle/gain',
+            dataType: 'json',
+            success: function(data){
+                $('.my_gain').html(data.my_gain);
+            }
+        });
+    }
     chargeSolde();
     function chargeSolde(){
         $.ajax({
