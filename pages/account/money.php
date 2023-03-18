@@ -24,8 +24,8 @@ include_once $layout.'/auth/header.php'
                         Compte monétique
                     </div>
                     <div class="bg-white-color p30">
-                        <div class="row">
-                            <div class="col-md-3">
+                        <div class="row myrow">
+                            <div class="col-md-3 col50-mobile">
                                 <div class="ts-box">
                                     <div class="icon">
                                         <img src="<?=$cdn_domaine?>/media/om.png" class="img-money" alt=""/>
@@ -36,7 +36,7 @@ include_once $layout.'/auth/header.php'
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col50-mobile">
                                 <div class="ts-box">
                                     <div class="icon">
                                         <img src="<?=$cdn_domaine?>/media/mm.png" class="img-money" alt=""/>
@@ -47,7 +47,7 @@ include_once $layout.'/auth/header.php'
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col50-mobile">
                                 <div class="ts-box">
                                     <div class="icon">
                                         <img src="<?=$cdn_domaine?>/media/mov.png" class="img-money" alt=""/>
@@ -58,7 +58,7 @@ include_once $layout.'/auth/header.php'
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col50-mobile">
                                 <div class="ts-box">
                                     <div class="icon">
                                         <img src="<?=$cdn_domaine?>/media/wave.png" class="img-money" alt=""/>
@@ -69,7 +69,7 @@ include_once $layout.'/auth/header.php'
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col50-mobile">
                                 <div class="ts-box">
                                     <div class="icon">
                                         <i class="fa fa-wallet myicon-trend my-icon-dashboard-green"></i>
@@ -81,11 +81,19 @@ include_once $layout.'/auth/header.php'
                                 </div>
                             </div>
                         </div>
-                         <div class="">
-                             <a href="<?=$domaine?>/compte/orange" class="om">Orange money</a>
-                             <a href="<?=$domaine?>/compte/mtn" class="mtn">MTN money</a>
-                             <a href="<?=$domaine?>/compte/moov" class="moov">Moov money</a>
-                             <a href="<?=$domaine?>/compte/wave" class="wave">Wave</a>
+                         <div class="myrow">
+                            <div class="col33-mobile pb20">
+                                <a href="<?=$domaine?>/compte/orange" class="om">Orange money</a>
+                            </div>
+                             <div class="col33-mobile pb20">
+                                 <a href="<?=$domaine?>/compte/mtn" class="mtn">MTN money</a>
+                             </div>
+                             <div class="col33-mobile">
+                                 <a href="<?=$domaine?>/compte/moov" class="moov">Moov money</a>
+                             </div>
+                             <div class="col33-mobile">
+                                 <a href="<?=$domaine?>/compte/wave" class="wave">Wave</a>
+                             </div>
                          </div>
                     </div>
                 </div>
