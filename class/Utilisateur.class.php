@@ -70,7 +70,11 @@ class Utilisateur
     }
 
 //Read
-
+    public function getAllInscrits(){
+        $query = "SELECT * FROM utilisateur ORDER BY id_utilisateur DESC ";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
 
     public function getLocataireBySlug($slg){
         $query = "SELECT * FROM utilisateur

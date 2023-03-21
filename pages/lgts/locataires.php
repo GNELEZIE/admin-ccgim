@@ -65,7 +65,7 @@ include_once $layout.'/auth/header.php'?>
                                 <tr>
                                     <th>Date</th>
                                     <th>Nom</th>
-                                    <th>Téléphone</th>
+                                    <th>Maison</th>
                                     <th>Paiement</th>
                                     <th>Action</th>
                                 </tr>

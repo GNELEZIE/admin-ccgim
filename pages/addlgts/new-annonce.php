@@ -56,15 +56,15 @@ include_once $layout.'/auth/header.php'?>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="superficie">Superficie <i class="required"></i> </label>
-                                    <input type="number" name="superficie" id="superficie" class="form-control input-style input-height" placeholder="Superficie"  required style="padding-right: 33px;" step="any">
+                                    <label for="superficie">Superficie </label>
+                                    <input type="number" name="superficie" id="superficie" class="form-control input-style input-height" placeholder="Superficie" style="padding-right: 33px;" step="any">
                                     <span class="icon-m2">m<sup>2</sup></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="chambre">Chambres  <i class="required"></i> </label>
-                                    <input type="text" name="chambre" id="chambre" class="form-control input-style input-height" placeholder="Chambres" required style="padding-right: 33px;">
+                                    <label for="chambre">Chambres  </label>
+                                    <input type="text" name="chambre" id="chambre" class="form-control input-style input-height" placeholder="Chambres" style="padding-right: 33px;">
                                 </div>
                             </div>
                         </div>

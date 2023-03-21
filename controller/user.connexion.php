@@ -15,7 +15,7 @@ if( isset($_SESSION['myformkey'])  and isset($_POST['email']) AND isset($_POST['
                         setcookie('_ccgim_cookie', $userEmail, time() + 60 * 60 * 24 * 30, '/', $cookies_domaine, false, false);
                     }
                     if(isset($_GET['return'])){
-                        header('location:' . str_replace('-', '+', my_decrypt($_GET['return'])));
+                        header('location:' .$_GET['return']);
                     }else{
                         header('location:' . $domaine . '/compte/dashboard');
                     }

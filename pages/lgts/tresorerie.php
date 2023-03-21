@@ -78,7 +78,6 @@ include_once $layout.'/auth/header.php'?>
                             <tr>
                                 <th>Date</th>
                                 <th>Locataire</th>
-                                <th>Maison</th>
                                 <th>Libellé</th>
                                 <th>Montant</th>
                                 <th>Action</th>

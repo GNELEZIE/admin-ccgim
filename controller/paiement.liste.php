@@ -1,7 +1,7 @@
 <?php
 
 $arr_list = array('data' => array());
-if(isset($_SESSION['_ccgim_201'])  and isset($_SESSION['myformkey']) and isset($_POST['token']) and $_SESSION['myformkey'] == $_POST['token']){
+if(isset($_SESSION['_ccgim_201'])  and isset($_SESSION['myformkey'])){
 
 $liste = $tresorerie->getPaiementByUserIdJoin();
 while($dats = $liste->fetch()){
@@ -19,12 +19,11 @@ while($dats = $liste->fetch()){
         $mont = $debit + $credit;
         $montant = '<span class="badge-red"><b> - '. number_format($mont,0,',',' ').'</b> </span>';
     }
-    $numbs = html_entity_decode(stripslashes($datLgts["nom_lgt"])).'<br><small>'.$dats['dial_phone'] .' '.$dats['phone'].'</small>';
+    $numbs = '<br><small>'.$dats['dial_phone'] .' '.$dats['phone'].'</small>';
     $action = '<a href="'.$domaine.'/facture/'.$dats['ref_paiement'].'" class="btn-voir"> <i class="fa fa-print"></i></a>';
     $arr_list['data'][] = array(
         date_fr($dats['date_tresorerie']),
         $numbs,
-        html_entity_decode(stripslashes($datLgts["nom_lgt"])),
         html_entity_decode(stripslashes($dats["libelle_transac"])),
         $montant,
         $action
