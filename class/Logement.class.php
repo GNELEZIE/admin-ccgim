@@ -103,7 +103,7 @@ class Logement{
 
     public function getAllLgts(){
         $query = "SELECT * FROM logement
-          WHERE statut = 0 ORDER BY id_logement DESC ";
+          WHERE statut = 0 and id_logement != 1  ORDER BY id_logement DESC ";
         $rs = $this->bdd->query($query);
         return $rs;
     }

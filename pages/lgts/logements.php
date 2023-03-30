@@ -70,8 +70,8 @@ include_once $layout.'/auth/header.php'?>
                                                 while($galDatas = $gals->fetch()){
                                                     ?>
                                                     <div class="item  position-relative">
-                                                        <a href="<?=$domaine?>/annonce/description/<?=$dataLogt['slug_lgt']?>">
-                                                            <img src="<?=$cdn_domaine?>/media/lgts/<?=$galDatas['photo']?>" alt="<?=$galDatas['photo']?>" />
+                                                        <a href="https://cabinet-ccgim.com/logements/<?=$dataLogt['slug_lgt']?>" target="_blank">
+                                                            <img src="https://app.cabinet-ccgim.com/cdn/media/lgts/<?=$galDatas['photo']?>" alt="<?=$galDatas['photo']?>" />
                                                         </a>
                                                     </div>
                                                 <?php

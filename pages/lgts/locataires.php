@@ -295,7 +295,12 @@ include_once $layout.'/auth/header.php'?>
                                 <select class="wide form-control input-style input-height40" name="bail" id="bail">
                                     <option  selected>Choisir une N° Bail</option>
                                     <option value="Complement bail">Complement bail</option>
-                                    <option value="Bouake">Policier</option>
+                                    <option value="Policier">Policier</option>
+                                    <option value="Gendarme">Gendarme</option>
+                                    <option value="Civil">Civil</option>
+                                    <option value="Garde pénitentiaire">Garde pénitentiaire</option>
+                                    <option value="Eaux et forêts">Eaux et forêts</option>
+                                    <option value="Marin">Marin</option>
                                 </select>
                             </div>
                         </div>
