@@ -9,6 +9,23 @@ class Location
 
     //Create
 
+    public function addLocations($userDate,$userId,$lgtId,$bail,$locat){
+        $query = "INSERT INTO location(date_location,user_id,lgt_id,bail,locat)
+            VALUES (:userDate,:userId,:lgtId,:bail,:locat)";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "userDate" => $userDate,
+            "userId" => $userId,
+            "lgtId" => $lgtId,
+            "bail" => $bail,
+            "locat" => $locat
+        ));
+        $nb = $rs->rowCount();
+        if($nb > 0){
+            $r = $this->bdd->lastInsertId();
+            return $r;
+        }
+    }
     public function addLocation($userDate,$userId,$lgtId){
         $query = "INSERT INTO location(date_location,user_id,lgt_id)
             VALUES (:userDate,:userId,:lgtId)";

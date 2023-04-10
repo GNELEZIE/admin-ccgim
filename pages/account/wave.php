@@ -41,18 +41,6 @@ include_once $layout.'/auth/header.php'
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="ts-box">
-                                <div class="icon">
-                                    <img src="<?=$cdn_domaine?>/media/wave.png" class="img-money" alt=""/>
-                                </div>
-                                <div class="nbLgt">
-                                    <h2>Solde total</h2>
-                                    <h2 class="pb7"> <span class="sld"> <span class="om_solde"></span> </span> </h2>
-                                    <p class="line-height1"><small><i><span class="sld-red"><span class="om_credit"></span></span> depensé</i></small></p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="">
                         <div class="pt-2" style="padding-top: 20px">
@@ -60,8 +48,12 @@ include_once $layout.'/auth/header.php'
                                 <thead>
                                 <tr>
                                     <th>Date</th>
-                                    <th>Libellé</th>
-                                    <th style="width: 100px">Montant</th>
+                                    <th>Client</th>
+                                    <th>Contact</th>
+                                    <th>Solde AV</th>
+                                    <th>Dépôt</th>
+                                    <th>Retrait</th>
+                                    <th style="width: 100px">Solde AP</th>
                                 </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -85,21 +77,36 @@ include_once $layout.'/auth/header.php'
             </div>
             <form method="post" id="formWave">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="type_transac" class="pd15">Type d'opération</label>
-                        <select class="wide form-control no-nice-select-search-box input-style input-height select-transac" name="type_transac" id="type_transac" required>
-                            <option value="" selected>Type d'opération</option>
-                            <option value="1">Dépôt</option>
-                            <option value="2">Retrait</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="libelle" class="pd15">Libellé</label>
-                        <input type="text" class="form-control input-style input-height" name="libelle" id="libelle" placeholder="Libellé" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="montant" >Montant <i class="required"></i></label>
-                        <input type="text" class="form-control input-style input-height" name="montant" id="montant" placeholder="Montant" required/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="type_transac" class="pd7">Type d'opération</label>
+                                <select class="wide form-control no-nice-select-search-box input-style input-height select-transac" name="type_transac" id="type_transac" required>
+                                    <option value="" selected>Type d'opération</option>
+                                    <option value="2">Dépôt</option>
+                                    <option value="1">Retrait</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="client" class="pd7">Client</label>
+                                <input type="text" class="form-control input-style input-height" name="client" id="client" placeholder="Client" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="contact" class="pd7">Contact</label>
+                                <input type="text" class="form-control input-style input-height" name="contact" id="contact" placeholder="Contact" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="montant" >Montant <i class="required"></i></label>
+                                <input type="text" class="form-control input-style input-height" name="montant" id="montant" placeholder="Montant" required/>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -118,7 +125,12 @@ include_once $layout.'/auth/header.php'
 <script>
     var table_moov;
     $(document).ready(function() {
-
+        $("#contact,#montant").keyup(function (event) {
+            if (/\D/g.test(this.value)) {
+                //Filter non-digits from input value.
+                this.value = this.value.replace(/\D/g, '');
+            }
+        });
         chargeSoldeDispoOrange();
         function chargeSoldeDispoOrange(){
             $.ajax({
@@ -179,6 +191,10 @@ include_once $layout.'/auth/header.php'
                     token: "<?=$token?>"
                 }
             },
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             "ordering": false,
             "pageLength": 25,
             "oLanguage": {

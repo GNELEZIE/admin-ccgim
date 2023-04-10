@@ -11,6 +11,9 @@ $gainTotalDepense = $gain->getDepenseTotal()->fetch();
 $debitMois = $tresorerie->getPaiementMontByMonth($annee,$mois)->fetch();
 $creditMois = $tresorerie->getRetraitMontByMonth($annee,$mois)->fetch();
 
+$sldTotal = $gainTotalDepense['solde'] - $gainTotal['solde'];
+
+
 $Allcredit = $tresorerie->getAllCredit()->fetch();
 $montant = $tresorerie->getSoldeTotal()->fetch();
 $my_solde = number_format($montant['solde'],0 ,' ',' ').' <small>FCFA</small>';
@@ -56,8 +59,8 @@ include_once $layout.'/auth/header.php'?>
                                         <i class="fa fa-arrow-trend-up myicon-trend my-icon-dashboard-green"></i>
                                     </div>
                                     <div class="nbLgt">
-                                        <h2><?=number_format($gainTotal['solde'],0,',',' ')?> <small>FCFA</small></h2>
-                                        <p>Gain total</p>
+                                        <h2><?=number_format($sldTotal,0,',',' ')?> <small>FCFA</small></h2>
+                                        <p>Caisse</p>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +85,7 @@ include_once $layout.'/auth/header.php'?>
                                 </div>
                                 <div class="nbLgt">
                                     <h2><?=number_format($gainTotal['solde'],0,',',' ')?> <small>FCFA</small></h2>
-                                    <p>Gain total</p>
+                                    <p>Solde total</p>
                                 </div>
                             </div>
                         </div>

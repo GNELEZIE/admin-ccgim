@@ -36,23 +36,12 @@ include_once $layout.'/auth/header.php'
                                     <img src="<?=$cdn_domaine?>/media/om.png" class="img-money" alt=""/>
                                 </div>
                                 <div class="nbLgt pb10">
-                                    <h2>Solde disponible</h2>
+                                    <h2>Caisse UV</h2>
                                     <h2 class="pb7 mt12"> <span class="sld"> <span class="omdispo_solde"></span> </span> </h2>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="ts-box">
-                                <div class="icon">
-                                    <img src="<?=$cdn_domaine?>/media/om.png" class="img-money" alt=""/>
-                                </div>
-                                <div class="nbLgt">
-                                    <h2>Solde total</h2>
-                                    <h2 class="pb7"> <span class="sld"> <span class="om_solde"></span> </span> </h2>
-                                    <p class="line-height1"><small><i><span class="sld-red"><span class="om_credit"></span></span> depensé</i></small></p>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="">
                         <div class="pt-2" style="padding-top: 20px">
@@ -60,8 +49,12 @@ include_once $layout.'/auth/header.php'
                                 <thead>
                                 <tr>
                                     <th>Date</th>
-                                    <th>Libellé</th>
-                                    <th style="width: 100px">Montant</th>
+                                    <th>Client</th>
+                                    <th>Contact</th>
+                                    <th>Solde AV</th>
+                                    <th>Dépôt</th>
+                                    <th>Retrait</th>
+                                    <th style="width: 100px">Solde AP</th>
                                 </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -85,21 +78,36 @@ include_once $layout.'/auth/header.php'
             </div>
             <form method="post" id="formOrange">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="type_transac" class="pd15">Type d'opération</label>
-                        <select class="wide form-control no-nice-select-search-box input-style input-height select-transac" name="type_transac" id="type_transac" required>
-                            <option value="" selected>Type d'opération</option>
-                            <option value="1">Dépôt</option>
-                            <option value="2">Retrait</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="libelle" class="pd15">Libellé</label>
-                        <input type="text" class="form-control input-style input-height" name="libelle" id="libelle" placeholder="Libellé" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="montant" >Montant <i class="required"></i></label>
-                        <input type="text" class="form-control input-style input-height" name="montant" id="montant" placeholder="Montant" required/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="type_transac" class="pd7">Type d'opération</label>
+                                <select class="wide form-control no-nice-select-search-box input-style input-height select-transac" name="type_transac" id="type_transac" required>
+                                    <option value="" selected>Type d'opération</option>
+                                    <option value="2">Dépôt</option>
+                                    <option value="1">Retrait</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="client" class="pd7">Client</label>
+                                <input type="text" class="form-control input-style input-height" name="client" id="client" placeholder="Client" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="contact" class="pd7">Contact</label>
+                                <input type="text" class="form-control input-style input-height" name="contact" id="contact" placeholder="Contact" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="montant" >Montant <i class="required"></i></label>
+                                <input type="text" class="form-control input-style input-height" name="montant" id="montant" placeholder="Montant" required/>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -119,6 +127,12 @@ include_once $layout.'/auth/header.php'
     var table_orange;
     $(document).ready(function() {
 
+        $("#contact,#montant").keyup(function (event) {
+            if (/\D/g.test(this.value)) {
+                //Filter non-digits from input value.
+                this.value = this.value.replace(/\D/g, '');
+            }
+        });
         chargeSoldeDispoOrange();
         function chargeSoldeDispoOrange(){
             $.ajax({
@@ -134,22 +148,22 @@ include_once $layout.'/auth/header.php'
                 }
             });
         }
-        chargeSoldeOrange();
+       /* chargeSoldeOrange();
         function chargeSoldeOrange(){
             $.ajax({
                 type: 'post',
                 data: {
                     rsid: 1,
-                    token: "<?=$token?>"
+                    token: " "
                 },
-                url: '<?=$domaine?>/controle/solde.orange',
+                url: ' /controle/solde.orange',
                 dataType: 'json',
                 success: function(data){
                     $('.om_solde').html(data.om_solde);
                 }
             });
         }
-
+*/
 
         chargeCreditOrange();
         function chargeCreditOrange(){
@@ -179,6 +193,10 @@ include_once $layout.'/auth/header.php'
                     token: "<?=$token?>"
                 }
             },
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             "ordering": false,
             "pageLength": 25,
             "oLanguage": {
@@ -206,6 +224,7 @@ include_once $layout.'/auth/header.php'
 
         $('#formOrange').submit(function(e){
             e.preventDefault();
+            $(".loaderBtnPay").html('<i class="fa fa-circle-o-notch fa-spin"></i>');
             var value = document.getElementById('formOrange');
             var form = new FormData(value);
             $.ajax({
@@ -217,11 +236,13 @@ include_once $layout.'/auth/header.php'
                 processData:false,
                 success: function(data){
                     if(data == 'ok'){
-                        $('#libelle').val('');
+                        $('#type_transac').val('');
+                        $('#client').val('');
+                        $('#contact').val('');
                         $('#montant').val('');
-                        chargeSoldeOrange();
                         chargeCreditOrange();
                         chargeSoldeDispoOrange();
+                        $(".loaderBtnPay").html('');
                         table_orange.ajax.reload(null,false);
                         swal("Opération effectuée avec succès !","", "success");
                     }else if(data == 'solde'){
@@ -230,8 +251,11 @@ include_once $layout.'/auth/header.php'
                     }
                     else{
                         swal("Action Impossible !", "Une erreur s\'est produite.", "error");
-                        $('#libelle').val('');
+                        $('#type_transac').val('');
+                        $('#client').val('');
+                        $('#contact').val('');
                         $('#montant').val('');
+                        $(".loaderBtnPay").html('');
                     }
                 },
                 error: function (error, ajaxOptions, thrownError) {
@@ -240,6 +264,6 @@ include_once $layout.'/auth/header.php'
             });
 
         });
-        
+
     });
 </script>

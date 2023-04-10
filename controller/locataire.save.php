@@ -12,6 +12,9 @@ if(isset($_SESSION['_ccgim_201']) and isset($_POST['lgt']) and isset($_POST['nom
     $isoPhone = htmlentities(trim(addslashes(strip_tags($isoPhone))));
     $dialPhone = htmlentities(trim(addslashes(strip_tags($dialPhone))));
 
+    $locataire = htmlentities(trim(addslashes(strip_tags($locataire))));
+    $bail = htmlentities(trim(addslashes(strip_tags($bail))));
+
     $propriety = 'nom';
 
     $verifSlug = $utilisateur->verifUtilisateur($propriety,$noms);
@@ -29,7 +32,7 @@ if(isset($_SESSION['_ccgim_201']) and isset($_POST['lgt']) and isset($_POST['nom
     }
     $save = $utilisateur->addLocataire($dateGmt,$email,$slug,$noms,$prenom,$isoPhone,$dialPhone,$phone,$mdpCript,$typeCompte);
     if($save > 0){
-        $savaLaction = $location->addLocation($dateGmt,$save,$lgt);
+        $savaLaction = $location->addLocations($dateGmt,$save,$lgt,$bail,$locataire);
         echo 'ok';
     }
 

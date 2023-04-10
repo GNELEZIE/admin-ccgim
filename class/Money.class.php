@@ -24,18 +24,21 @@ class Money
             return $r;
         }
     }
-  public function addOrange($moneyDate,$reseau,$libelle,$typeTransac,$debit,$credit,$userId){
-        $query = "INSERT INTO money(date_money,reseau,libelle,type_transac,debit_transac,credit_transac,user_id)
-            VALUES (:moneyDate,:reseau,:libelle,:typeTransac,:debit,:credit,:userId)";
+  public function addOrange($moneyDate,$reseau,$typeTransac,$debit,$credit,$userId,$client,$contact,$soldeAv,$soldeAp){
+        $query = "INSERT INTO money(date_money,reseau,type_transac,debit_transac,credit_transac,user_id,client,contact,solde_av,solde_ap)
+            VALUES (:moneyDate,:reseau,:typeTransac,:debit,:credit,:userId,:client,:contact,:soldeAv,:soldeAp)";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "moneyDate" => $moneyDate,
             "reseau" => $reseau,
-            "libelle" => $libelle,
             "typeTransac" => $typeTransac,
             "debit" => $debit,
             "credit" => $credit,
-            "userId" => $userId
+            "userId" => $userId,
+            "client" => $client,
+            "contact" => $contact,
+            "soldeAv" => $soldeAv,
+            "soldeAp" => $soldeAp
         ));
         $nb = $rs->rowCount();
         if($nb > 0){
@@ -56,7 +59,7 @@ class Money
 
     public function getMoneyByReseau($rseu){
         $query = "SELECT * FROM money
-          WHERE reseau =:rseu";
+          WHERE reseau =:rseu ORDER BY id_money DESC";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "rseu" => $rseu
@@ -116,15 +119,19 @@ class Money
     }
 
 
-    public function getGainTotal()
-    {
+    public function getGainTotal(){
         $query = "SELECT SUM(gain) as solde FROM money";
         $rs = $this->bdd->query($query);
         return $rs;
 
     }
-  public function getGainTotals()
-    {
+  public function getGainTotalLiquide(){
+        $query = "SELECT SUM(debit_transac) as solde FROM money";
+        $rs = $this->bdd->query($query);
+        return $rs;
+
+    }
+    public function getGainTotals(){
         $query = "SELECT SUM(debit_transac) - SUM(credit_transac) as solde FROM money";
         $rs = $this->bdd->query($query);
         return $rs;
@@ -145,6 +152,36 @@ class Money
             "val" => $val
         ));
         return $rs;
+    }
+
+
+
+    //Liquide table
+
+    public function addLiq($liqDate,$debitTransac,$creditTransac){
+        $query = "INSERT INTO liquide(date_liquide,debit_transac,credit_transac)
+            VALUES (:liqDate,:debitTransac,:creditTransac)";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "liqDate" => $liqDate,
+            "debitTransac" => $debitTransac,
+            "creditTransac" => $creditTransac
+        ));
+        $nb = $rs->rowCount();
+        if($nb > 0){
+            $r = $this->bdd->lastInsertId();
+            return $r;
+        }
+    }
+
+
+//Count
+
+    public function getLiquide(){
+        $query = "SELECT SUM(debit_transac) - SUM(credit_transac) as solde FROM liquide";
+        $rs = $this->bdd->query($query);
+        return $rs;
+
     }
 
 

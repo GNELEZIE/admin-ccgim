@@ -57,6 +57,17 @@ class Tresorerie
 
 
 //Read
+    public function getPaiementByRef($ref){
+        $query = "SELECT * FROM tresorerie
+        WHERE ref_paiement =:ref";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "ref" => $ref
+        ));
+
+        return $rs;
+    }
+
     public function getPaiementHistoByUser($userId){
         $query = "SELECT * FROM tresorerie
         WHERE user_id =:userId
@@ -163,6 +174,18 @@ class Tresorerie
                   WHERE utilisateur_id =:propId";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
+            "propId" => $propId
+        ));
+
+        return $rs;
+    }
+
+    public function getSoldeMoisByProprietaire($propId, $mois){
+        $query = "SELECT SUM(debit_transac) as solde FROM tresorerie
+                  WHERE user_id =:propId and DATE_FORMAT(date_tresorerie, '%Y-%m')  =:mois";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "mois" => $mois,
             "propId" => $propId
         ));
 

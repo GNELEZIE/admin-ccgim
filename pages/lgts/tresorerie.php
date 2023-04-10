@@ -39,20 +39,12 @@ include_once $layout.'/auth/header.php'?>
                                 </div>
                                 <div class="nbLgt">
                                     <h2 class="my_gain"></h2>
-                                    <p>Gain total</p>
+                                    <p>Caisse</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="ts-box-infos mt30">
-                                <div class="icon">
-                                    <i class="fa fa-wallet myicon-trend my-icon-dashboard-blue"></i>
-                                </div>
-                                <div class="nbLgt">
-                                    <h2 class="my_solde"></h2>
-                                    <p>Solde total</p>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="pc-none position-relative">
@@ -265,20 +257,20 @@ include_once $layout.'/auth/header.php'?>
             });
         }
 
-        chargeSolde();
+     /*   chargeSolde();
         function chargeSolde(){
             $.ajax({
                 type: 'post',
                 data: {
-                    token: "<?=$token?>"
+                    token: " "
                 },
-                url: '<?=$domaine?>/controle/solde',
+                url: ' /controle/solde',
                 dataType: 'json',
                 success: function(data){
                     $('.my_solde').html(data.my_solde);
                 }
             });
-        }
+        }*/
         $('#formSortieCaisse').submit(function(e){
             e.preventDefault();
             var value = document.getElementById('formSortieCaisse');
@@ -286,7 +278,7 @@ include_once $layout.'/auth/header.php'?>
 
             $.ajax({
                 method: 'post',
-                url: '<?=$domaine?>/controle/sortiecaisse.save',
+                url: '<?=$domaine?>/controle/caisse',
                 data: form,
                 contentType:false,
                 cache:false,
@@ -299,7 +291,7 @@ include_once $layout.'/auth/header.php'?>
                         chargeGain();
                         table_tresorerie.ajax.reload(null,false);
                         $(".loaderBtnPay").html('');
-                        swal("Le paiement a été ajouté avec succès !","", "success");
+                        swal("Le paiement a été ajouté avec succès !!!","", "success");
                     }else if(data == 'solde'){
                         $(".loaderBtnPay").html('');
                         swal("Action Impossible !", "Votre solde est insuffisant !", "error");

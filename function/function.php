@@ -1,12 +1,13 @@
 <?php
 $dateGmt = gmdate('Y-m-d H:i');
 // page active
-
+$domaine_sit = 'https://www.cabinet-ccgim.com';
 
 
 if(!function_exists('gain')){
-    function gain($mont){
-        $rs = ($mont*10)/100;
+    function gain($mont,$taux){
+        $ts = ($mont*$taux)/100;
+        $rs = $mont-$ts;
         return $rs;
     }
 }

@@ -13,14 +13,16 @@ while($dats = $liste->fetch()){
         $credit = 0;
         $mont = $debit + $credit;
         $montant = '<span class="badge-green"><b> + '. number_format($mont,0,',',' ').'</b> </span>';
+        $action = '<a href="'.$domaine.'/facture/'.$dats['ref_paiement'].'" class="btn-voir"> <i class="fa fa-print"></i></a>';
     }else{
         $debit = 0;
         $credit = $dats['credit_transac'];
         $mont = $debit + $credit;
         $montant = '<span class="badge-red"><b> - '. number_format($mont,0,',',' ').'</b> </span>';
+        $action = '';
     }
     $numbs = '<br><small>'.$dats['dial_phone'] .' '.$dats['phone'].'</small>';
-    $action = '<a href="'.$domaine.'/facture/'.$dats['ref_paiement'].'" class="btn-voir"> <i class="fa fa-print"></i></a>';
+
     $arr_list['data'][] = array(
         date_fr($dats['date_tresorerie']),
         $numbs,

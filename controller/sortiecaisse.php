@@ -7,16 +7,16 @@ if(isset($_SESSION['_ccgim_201'])  and isset($_POST['libelle']) and isset($_SESS
 
     $lgt_id = 1;
     $locataire = 1;
-    $type_transac = 2;
+    $typ= 2;
     $debit = 0;
-    $type_transac = 1;
+    $taux = 1;
     $credit = $montant;
     $solde = $gain->getGainTotal()->fetch();
 
     if($montant <= $solde['solde']){
-        $save = $tresorerie->RetraitOperation($dateGmt,$_SESSION['_ccgim_201']['id_utilisateur'],$lgt_id,$type_transac,$libelle,$debit,$credit);
+        $save = $tresorerie->RetraitOperation($dateGmt,$_SESSION['_ccgim_201']['id_utilisateur'],$lgt_id,$typ,$libelle,$debit,$credit);
         if($save > 0){
-            $payGain = $gain->addGain($dateGmt,$lgt_id,$credit,$type_transac);
+            $payGain = $gain->addGain($dateGmt,$lgt_id,$credit,$typ,$taux);
             echo 'ok';
         }
     }else{

@@ -38,6 +38,13 @@ class Logement{
 
     //Read
 
+    public function getAllLogement(){
+        $query = "SELECT * FROM logement
+                  WHERE adm = 0 ORDER BY id_logement DESC ";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
+
     public function getLogementByUserId($idUsr){
         $query = "SELECT * FROM logement
         WHERE utilisateur_id = :idUsr";

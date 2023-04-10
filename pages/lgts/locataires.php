@@ -65,12 +65,13 @@ include_once $layout.'/auth/header.php'?>
                                 <tr>
                                     <th>Date</th>
                                     <th>Nom</th>
-                                    <th>Maison</th>
+                                    <th>Type</th>
+                                    <th class="w-195">Maison</th>
                                     <th>Paiement</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody class="trbody"></tbody>
                             </table>
                         </div>
 
@@ -220,10 +221,14 @@ include_once $layout.'/auth/header.php'?>
                         <input type="text" class="form-control input-style input-height" name="libelle" id="libelle" placeholder="Libellé">
                     </div>
                     <div class="form-group">
-                        <label for="montant">Montant <i class="required"></i></label>
-                        <input type="text" class="form-control input-style input-height" name="montant" id="montant" placeholder="Montant" required disabled readonly/>
+                        <label for="montant">Montant(CFA) <i class="required"></i></label>
+                        <input type="text" class="form-control input-style input-height" name="mont" id="mont" placeholder="Montant" required/>
                         <input type="hidden" name="userId" id="userId"/>
                         <input type="hidden" name="lgt_id" id="lgt_id"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="taux">Pourcentage  <i class="required"></i></label>
+                        <input type="text" class="form-control input-style input-height" name="taux" id="taux" placeholder="Pourcentage" required/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -291,13 +296,22 @@ include_once $layout.'/auth/header.php'?>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label for="locataire" >Type de locataire</label>
+                                <select class="wide form-control input-style input-height40 loca" name="locataire" id="locataire">
+                                    <option  selected>Choisir un type de locataire</option>
+                                    <option value="1">Bail</option>
+                                    <option value="2">Civil</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 show-bail">
+                            <div class="form-group remove-none bail-input">
                                 <label for="bail" >N° Bail</label>
                                 <select class="wide form-control input-style input-height40" name="bail" id="bail">
                                     <option  selected>Choisir une N° Bail</option>
                                     <option value="Complement bail">Complement bail</option>
                                     <option value="Policier">Policier</option>
                                     <option value="Gendarme">Gendarme</option>
-                                    <option value="Civil">Civil</option>
                                     <option value="Garde pénitentiaire">Garde pénitentiaire</option>
                                     <option value="Eaux et forêts">Eaux et forêts</option>
                                     <option value="Marin">Marin</option>
@@ -326,6 +340,21 @@ include_once $layout.'/auth/header.php'?>
 
 <?php include_once $layout.'/auth/footer.php'?>
 <script>
+
+
+    $("select.loca").change(function() {
+        var locataire = $(this).children("option:selected").val();
+        if (locataire == '1') {
+            $('.remove-none').removeClass('bail-input','bail-input');
+            $('#bail').attr('required','required');
+        }else{
+            $('.remove-none').addClass('bail-input','bail-input');
+            $('#locataire').removeAttr('required','required');
+        }
+    });
+
+
+
     var mySearch = $('.mySearch');
     var searchBtn = $('.searchBtn');
     var myTimes = $('.myTimes');
@@ -426,10 +455,11 @@ $(document).ready(function() {
 
 
 
+    $('#locataire').niceSelect();
     $('#bail').niceSelect();
     $('#lgt').niceSelect();
 
-    $("#phone").keyup(function (event) {
+    $("#phone,#taux").keyup(function (event) {
         if (/\D/g.test(this.value)) {
             //Filter non-digits from input value.
             this.value = this.value.replace(/\D/g, '');
@@ -457,11 +487,11 @@ $(document).ready(function() {
         var userId = $(e.relatedTarget).data('id');
         var lgt_id = $(e.relatedTarget).data('logt');
         var userName = $(e.relatedTarget).data('name');
-        var montant = $(e.relatedTarget).data('montant');
+        var mont = $(e.relatedTarget).data('montant');
         $('#nom').html(userName);
         $('#userId').val(userId);
         $('#lgt_id').val(lgt_id);
-        $('#montant').val(montant);
+        $('#mont').val(mont);
 
     });
 

@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="<?=$cdn_domaine?>/assets/libs/intltelinput/css/intlTelInput.min.css"/>
     <link rel="stylesheet" href="<?=$cdn_domaine?>/assets/libs/owlcarousel/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?=$cdn_domaine?>/assets/libs/datatable/datatables.min.css">
+    <link rel="stylesheet" href="<?=$cdn_domaine?>/assets/libs/datatable/buttons.dataTables.min.css">
     <link rel="stylesheet" href="<?=$cdn_domaine?>/assets/libs/font-awesome/css/all.css">
     <link rel="stylesheet" href="<?=$cdn_domaine?>/assets/libs/font-awesome/css/v4-shims.css">
 <!--    <link rel="stylesheet" href="--><?//=$cdn_domaine?><!--/assets/css/wizard-style.css">-->
@@ -1156,6 +1157,9 @@
         .pd15{
             padding-top: 15px !important;
         }
+        .pd7{
+            padding-top: 15px !important;
+        }
         .myLogo{
             width: 81px;
         }
@@ -1210,6 +1214,9 @@
             outline: 0 !important;
         }
         .locataire-input{
+            display: none;
+        }
+        .bail-input{
             display: none;
         }
         .pt50{
@@ -1382,7 +1389,47 @@
             margin-left: -15px;
         }
 
-
+        .logt tr td{
+            text-transform: lowercase !important;
+        }
+        .w-130{
+            width: 130px !important;
+        }
+        .w-195{
+            width: 195px !important; ;
+        }
+        #table_locataire .trbody tr td{
+            font-size: 13px !important;
+        }
+        .font-11{
+            font-size: 11px !important;
+        }
+        .buttons-pdf{
+            padding: 7px 14px !important;
+            font-size: 11px !important;
+            border-radius: 4px !important;
+            background: rgba(208, 22, 24, 0.28) !important;
+            color: #d01618 !important;
+            border: none !important;
+            font-weight: 500 !important;
+        }
+        .buttons-pdf:hover{
+            background: #d01618 !important;
+            color: #fff !important;
+        }
+        .buttons-excel{
+            padding: 7px 14px !important;
+            font-size: 11px !important;
+            border-radius: 4px !important;
+            background: rgba(0, 128, 0, 0.22) !important;
+            color: #008000 !important;
+            border: none !important;
+            font-weight: 500 !important;
+        }
+        .buttons-excel:hover{
+            background: #008000 !important;
+            color: #fff !important;
+        }
 
 
 

@@ -35,7 +35,6 @@ include_once $layout.'/auth/header.php'?>
                         </div>
                     </div>
                     <div class="bg-white-color pb30 mes-lgts">
-                        <h3 class="titre-mobile">La liste des inscripts</h3>
                             <table id="table_inscrits" class="table newtable">
                                 <thead>
                                 <tr>

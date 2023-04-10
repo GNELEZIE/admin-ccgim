@@ -21,6 +21,12 @@
 <script src="<?=$cdn_domaine?>/assets/libs/intltelinput/js/intlTelInput.min.js"></script>
 <script src="<?=$cdn_domaine?>/assets/libs/owlcarousel/js/owl.carousel.js"></script>
 <script src="<?=$cdn_domaine?>/assets/libs/datatable/datatables.min.js"></script>
+<script src="<?=$cdn_domaine?>/assets/libs/datatable/dataTables.buttons.min.js"></script>
+<script src="<?=$cdn_domaine?>/assets/libs/datatable/jszip.min.js"></script>
+<script src="<?=$cdn_domaine?>/assets/libs/datatable/pdfmake.min.js"></script>
+<script src="<?=$cdn_domaine?>/assets/libs/datatable/vfs_fonts.js"></script>
+<script src="<?=$cdn_domaine?>/assets/libs/datatable/buttons.html5.min.js"></script>
+<script src="<?=$cdn_domaine?>/assets/libs/datatable/buttons.print.min.js"></script>
 </body>
 </html>
 

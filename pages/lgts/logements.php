@@ -25,10 +25,9 @@ $myPage = '/compte/logements';
 $lgst = $logement->getLogementByUsers($debut, $fin);
 
 
-
-
-
-
+$token = openssl_random_pseudo_bytes(16);
+$token = bin2hex($token);
+$_SESSION['myformkey'] = $token;
 
 include_once $layout.'/auth/header.php'?>
 
@@ -56,252 +55,20 @@ include_once $layout.'/auth/header.php'?>
 
                     </div>
                     <div class="bg-white-color pb30 mes-lgts">
-                    <div class="row ">
-                        <?php
-                        while($dataLogt = $lgst->fetch()){
-                            $gals = $galerie->getGalerieByLgtId($dataLogt['id_logement']);
-                            ?>
-                            <div class="col-md-4">
-                                <div class="apartments-content">
-                                    <div class="image-content">
-                                        <div class="caroussel-item">
-                                            <div class="owl-carousel position-relative">
-                                                <?php
-                                                while($galDatas = $gals->fetch()){
-                                                    ?>
-                                                    <div class="item  position-relative">
-                                                        <a href="https://cabinet-ccgim.com/logements/<?=$dataLogt['slug_lgt']?>" target="_blank">
-                                                            <img src="https://app.cabinet-ccgim.com/cdn/media/lgts/<?=$galDatas['photo']?>" alt="<?=$galDatas['photo']?>" />
-                                                        </a>
-                                                    </div>
-                                                <?php
-                                                }
-                                                ?>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="text-content">
-                                        <div class="top-content text-box-home">
-                                            <h3><a href="<?=$domaine?>/annonce/description/<?=$dataLogt['slug_lgt']?>" class="font-15"><?=reduit_text(html_entity_decode(stripslashes($dataLogt['nom_lgt'])),'20') ?></a></h3>
-                                            <span><i class="fa fa-map-marker font-13"></i><?=html_entity_decode(stripslashes($dataLogt['ville_lgt'])) .', '.html_entity_decode(stripslashes($dataLogt['quartier_lgt'])) ?></span>
-                                        </div>
-                                        <div class="bottom-content clearfix">
-                                            <span class="clearfix"></span>
-                                            <div class="rent-price pull-left">
-                                                <span class="font-11"><?=number_format($dataLogt['tarif'],0,',',' ') ?> CFA</span>
-                                            </div>
-                                            <div class="share-meta dropup pull-right">
-                                                <ul>
-                                                    <li class="dropup">
-                                                        <a href="#" class="dropdown-toggle font-11" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i></a>
-                                                        <ul class="dropdown-menu">
-                                                            <li>
-                                                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="font-11"><i class="fa fa-eye m-0"></i> 23</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="pagination-link text-center">
-                                    <ul class="pagination">
-                                        <?php
-                                        if(isset($_GET['page']) and is_numeric($_GET['page'])){
-
-                                            if($pages < 2 ){
-                                                $pagination_list = '
-                                            <li class=""><a href="javascript:void(0)" class="" ><i class="fa fa-angle-left"></i></a></li>
-                                            <li class=" active"><a href="javascript:void(0)"  class="active">1</a></li>
-                                            <li class=""><a href="javascript:void(0)" class="" ><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                                        ';
-                                            }else{
-                                                if($_GET['page'] > 1 ){
-                                                    $prec = $_GET['page']-1;
-                                                    $pagination_list .= '
-                                           <li class=""> <a href="'.$domaine.$myPage.'?page='.$prec.'" class=""> <i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
-                                        ';
-                                                }else{
-                                                    $prec = 1;
-                                                    $pagination_list .= '
-                                           <li class=""><a href="javascript:void(0)" style="cursor: not-allowed" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
-                                        ';
-                                                }
-
-                                                if($pages > 5){
-                                                    for($i = 1; $i <= $pages ; $i++){
-                                                        if($_GET['page'] > 2){
-                                                            if($i > $_GET['page']-2 and $i < $_GET['page']+2){
-                                                                if($i != $pages){
-                                                                    if($i == $_GET['page']){
-                                                                        $pagination_list .='
-                                                                 <li class=" active"><a href="javascript:void(0)" class="">'.$i.'</a></li>
-                                                            ';
-                                                                    }else{
-                                                                        if($i < 3){
-                                                                            $pagination_list .='
-                                                                 <li class=""><a href="'.$domaine.$myPage.'?page='.$i.'" class="">'.$i.'</a></li>
-                                                            ';
-                                                                        }else{
-                                                                            $pagination_list .='
-                                                                 <li class="hidden-xs "><a href="'.$domaine.$myPage.'?page='.$i.'" class="">'.$i.'</a></li>
-                                                            ';
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }else{
-                                                            if($i < 6){
-                                                                if($i == $_GET['page']){
-                                                                    $pagination_list .='
-                                                             <li class=" active"><a href="javascript:void(0)"  class="active ">'.$i.'</a></li>
-                                                        ';
-                                                                }else{
-                                                                    if($i < 3){
-                                                                        $pagination_list .='
-                                                             <li class=""><a href="'.$domaine.$myPage.'?page='.$i.'" class="">'.$i.'</a></li>
-                                                        ';
-                                                                    }else{
-                                                                        $pagination_list .='
-                                                             <li class="hidden-xs "><a href="'.$domaine.$myPage.'?page='.$i.'" class="">'.$i.'</a></li>
-                                                        ';
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                    if($_GET['page'] < $pages-2){
-                                                        $pagination_list .='
-                                                    <li class="hidden-xs "><a href="javascript:void(0)" class="">...</a></li>
-                                                ';
-                                                    }
-                                                    if($_GET['page'] == $pages){
-                                                        $pagination_list .='
-                                                    <li class=" active"><a href="javascript:void(0)" class="">'.$i.'</a></li>
-                                                ';
-                                                    }else{
-                                                        $pagination_list .='
-                                                    <li class="hidden-xs "><a href="'.$domaine.$myPage.'?page='.$pages.'" class="">'.$pages.'</a></li>
-                                                ';
-                                                    }
-                                                }else{
-                                                    for($i = 1; $i <= $pages ; $i++){
-                                                        if($i == $_GET['page']){
-                                                            $pagination_list .='
-                                                        <li class=" active"><a href="javascript:void(0)"  class="">'.$i.'</a></li>
-                                                ';
-                                                        }else{
-                                                            if($i < 3){
-                                                                $pagination_list .='
-                                                    <li class=""><a href="'.$domaine.$myPage.'?page='.$i.'" class="">'.$i.'</a></li>
-                                                ';
-                                                            }else{
-                                                                $pagination_list .='
-                                                    <li class="hidden-xs "><a href="'.$domaine.$myPage.'?page='.$i.'" class="">'.$i.'</a></li>
-                                                ';
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                                if($_GET['page'] < $pages ){
-                                                    $suiv = $_GET['page']+1;
-                                                    $pagination_list .= '
-                                            <li class=""><a href="'.$domaine.$myPage.'?page='.$suiv.'"  class=""><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                                        ';
-                                                }else{
-                                                    $suiv = $pages;
-                                                    $pagination_list .= '
-                                            <li class=""><a href="javascript:void(0)" style="cursor: not-allowed"  class=""><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                                        ';
-                                                }
-
-                                            }
-                                        }else{
-                                            if($pages < 2 ){
-                                                $pagination_list = '
-                                            <li class=""><a href="javascript:void(0)"  class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
-                                            <li class=" active"><a href="javascript:void(0)"  class="">1</a></li>
-                                            <li class=""><a href="javascript:void(0)"  class=""><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                                        ';
-                                            }else{
-                                                $pagination_list .= '
-                                            <li class=""><a href="javascript:void(0)" style="cursor: not-allowed" class=""><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
-                                        ';
-                                                if($pages > 5){
-                                                    for($i = 1; $i <= $pages ; $i++){
-                                                        if($i < 6){
-                                                            if($i == 1){
-                                                                $pagination_list .='
-                                                            <li class=" active"><a href="javascript:void(0)"  class="">'.$i.'</a></li>
-                                                        ';
-                                                            }else{
-                                                                if($i < 3){
-                                                                    $pagination_list .='
-                                                            <li class=""><a href="'.$domaine.$myPage.'?page='.$i.'" class="">'.$i.'</a></li>
-                                                        ';
-                                                                }else{
-                                                                    $pagination_list .='
-                                                            <li class="hidden-xs "><a href="'.$domaine.$myPage.'?page='.$i.'" class="">'.$i.'</a></li>
-                                                        ';
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                    $pagination_list .='
-                                                    <li class="hidden-xs "><a href="javascript:void(0)" class="">...</a></li>
-                                            ';
-                                                    $pagination_list .='
-                                                    <li class="hidden-xs "><a href="'.$domaine.$myPage.'?page='.$pages.'" class="">'.$pages.'</a></li>
-                                            ';
-                                                }else{
-                                                    for($i = 1; $i <= $pages ; $i++){
-                                                        if($i == 1){
-                                                            $pagination_list .='
-                                                        <li class=" active"><a href="javascript:void(0)"  class="">'.$i.'</a></li>
-                                                    ';
-                                                        }else{
-                                                            if($i < 3){
-                                                                $pagination_list .='
-                                                    <li class=""><a href="'.$domaine.$myPage.'?page='.$i.'" class="">'.$i.'</a></li>
-                                                    ';
-                                                            }else{
-                                                                $pagination_list .='
-                                                    <li class="hidden-xs "><a href="'.$domaine.$myPage.'?page='.$i.'" class="">'.$i.'</a></li>
-                                                    ';
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                $pagination_list .= '
-                                            <li class=""><a href="'.$domaine.$myPage.'?page='.(1+1).'" class=""><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                                        ';
-                                            }
-                                        }
-                                        ?>
-                                        <?=$pagination_list?>
-                                    </ul>
-                                    
-                                    
-                                    
-                                </div>
-                            </div>
+                        <div class="mobile">
+                            <table id="table_logement" class="table newtable">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th class="w-130">Désignation</th>
+                                    <th>Ville</th>
+                                    <th>Prix</th>
+                                    <th>Statut</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody class="logt"></tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -313,7 +80,49 @@ include_once $layout.'/auth/header.php'?>
 
 <?php include_once $layout.'/auth/footer.php'?>
 <script>
+    var table_logement;
     $(document).ready(function() {
+        table_logement = $('#table_logement').DataTable({
+            "ajax": {
+                "type": "post",
+                "url": "<?=$domaine?>/controle/logement.liste",
+                "data": {
+                    token: "<?=$token?>"
+                }
+            },
+            "ordering": false,
+            "pageLength": 25,
+            "oLanguage": {
+                "sProcessing": "Traitement en cours ...",
+                "sLengthMenu": '<h3>Les logements</h3>',
+                "sZeroRecords": "Aucun résultat trouvé",
+                "sEmptyTable": "Aucune donnée disponible",
+                "sInfo": "Lignes _START_ à _END_ sur _TOTAL_",
+                "sInfoEmpty": "Aucune ligne affichée",
+                "sInfoFiltered": "(Filtrer un maximum de_MAX_)",
+                "sSearch": '<i class="fa fa-search table-seach"></i>',
+                "sSearchPlaceholder": "Recherche",
+                "sLoadingRecords": '<i class="fa fa-circle-o-notch fa-spin"></i> Chargement...',
+                "oPaginate":{
+                    "sPrevious": '<i class="fa fa-angle-double-left"></i>',
+                    "sNext": '<i class="fa fa-angle-double-right"></i>'
+                },
+                "oAria": {
+                    "sSortAscending": ": Trier par ordre croissant",
+                    "sSortDescending": ": Trier par ordre décroissant"
+                }
+
+            }
+        });
+
+
+
+
+
+
+
+
+
         var owl = $('.owl-carousel');
         owl.owlCarousel({
             loop: true,

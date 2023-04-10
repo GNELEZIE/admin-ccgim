@@ -82,14 +82,23 @@
     .myLogo{
         margin-top: 10mm;
         margin-left: 16mm;
-        max-width: 170px;
+        margin-bottom: 26mm;
+        width: 80px;
     }
 
 
 </style>
 
 <page backtop="15mm" backbottom="15mm" backleft="16mm" backright="16mm">
-
+    <page_header>
+        <table>
+            <tr>
+                <td>
+                    <img src="./cdn/media/logo.jpg" class="myLogo" title="logo" alt="logo"/>
+                </td>
+            </tr>
+        </table>
+    </page_header>
     <page_footer>
         <table class="page_footer">
             <tr>
@@ -108,23 +117,23 @@
         <tr>
             <td class="65p text-blue">
                 <span>CCGIM</span><br>
-                <span>Adjame</span><br>
-                <span>Email@gmail.com</span><br>
-                <span>Agent : Kone</span>
+                <span>YOPOUGON attié 9 ième tranche</span><br>
+                <span>support@cabinet-ccgim.com</span><br>
+                <span>Agent : <?= html_entity_decode(stripslashes($_SESSION['_ccgim_201']['nom']))?></span>
             </td>
             <td class="35p text-blue">
-                <span>Sangare</span><br>
-                <span>Cocody</span><br>
-                <span>Cocody Danga</span><br>
-                <span>p0558855465</span>
+                <span><?= html_entity_decode(stripslashes($users['nom'])) .' '.html_entity_decode(stripslashes($users['prenom']))?></span><br>
+                <span><?= html_entity_decode(stripslashes($users['ville']))?></span><br>
+                <span><?= html_entity_decode(stripslashes($users['adresse']))?></span><br>
+                <span><?= html_entity_decode(stripslashes($users['phone']))?></span>
             </td>
         </tr>
     </table>
     <table style="margin-top: 70px;vertical-align: top;">
         <tr>
             <td class="65p text-blue">
-                <span>Facture N° f155555555</span><br>
-                <span>Date d'émission : 29/01/30</span>
+                <span>Facture N° <?= html_entity_decode(stripslashes($datas['ref_paiement']))?></span><br>
+                <span>Date d'émission : <?= date_fr($datas['date_tresorerie'])?></span>
             </td>
             <td class="35p text-blue">
 
@@ -134,15 +143,15 @@
     <table style="margin-top: 20px;" class="border">
         <thead>
         <tr>
-            <th class="70p " style="">Désignation</th>
+            <th class="70p " style="text-align: left">Nom du locataire</th>
             <th class="30p " style="">Montant</th>
         </tr>
         </thead>
         <tbody>
 
             <tr>
-                <td style="text-align: left">Paiment de loyer</td>
-                <td style="text-align: right">150 000</td>
+                <td style="text-align: left"><?= html_entity_decode(stripslashes($users['nom'])) .' '.html_entity_decode(stripslashes($users['prenom']))?></td>
+                <td style="text-align: right"><?=number_format($datas['debit_transac'],0,',',' ')?> FCFA</td>
             </tr>
 
         </tbody>
@@ -150,14 +159,14 @@
     <table style="margin-top: 25px;vertical-align: top;">
         <tr>
             <td>
-                <span class="text-blue" style="font-size: 10px;line-height: 15px">Condition de vente</span>
+
             </td>
         </tr>
     </table>
     <table style="margin-top: 250px;vertical-align: top;">
         <tr>
             <td class="80p text-blue">
-                <!--<strong style="text-decoration: underline">Pour le client</strong>-->
+
             </td>
             <td class="20p text-blue">
                 <strong style="text-decoration: underline">Signature</strong>
